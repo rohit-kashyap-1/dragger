@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #draggableDiv{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black ;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="" id="draggableDiv">
+
+    </div>
+    <script>
+        // Get a reference to the draggable div
+        const draggableDiv = document.getElementById('draggableDiv');
+
+        let isDragging = false; // To track whether the div is being dragged
+        let offsetX, offsetY; // To store the initial cursor position relative to the div's position
+
+        // Mouse down event to start dragging
+        draggableDiv.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            
+            offsetX = e.clientX - draggableDiv.getBoundingClientRect().left;
+            offsetY = e.clientY - draggableDiv.getBoundingClientRect().top;
+            console.log(offsetY)
+        });
+
+        // Mouse move event to update the div's position while dragging
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                draggableDiv.style.left = e.clientX - offsetX + 'px';
+                draggableDiv.style.top = e.clientY - offsetY + 'px';
+            }
+        });
+
+        // Mouse up event to stop dragging
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    </script>
+
+</body>
+
+</html>
